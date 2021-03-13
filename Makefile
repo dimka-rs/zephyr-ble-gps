@@ -1,6 +1,8 @@
 BOARD ?= nrf52dk_nrf52832
 OPENOCD ?= $(HOME)/repos/openocd
 
+.PHONY: all clean flash menuconfig guiconfig init mcuboot flash_mcuboot flashst reset rtt
+
 all:
 	west build -b $(BOARD) -- -DBOARD_ROOT=$(CURDIR)
 
@@ -59,3 +61,5 @@ reset:
 		-c reset \
 		-c exit
 
+rtt:
+	JLinkRTTViewer --autoconnect --speed 4000 --interface swd --connection usb --device nrf52832_xxaa
